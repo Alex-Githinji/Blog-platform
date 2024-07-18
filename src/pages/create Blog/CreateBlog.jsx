@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Blog() {
+function Contact() {
   return (
-   <h1>Blog</h1>
+    <h1>create Blog</h1>
   )
 }
 
-export default Blog
+export default Contact
