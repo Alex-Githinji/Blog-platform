@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./login.css";
 
 const Login = () => {
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (formValues) => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:3001/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+        alert("Logged in successfully");
+        navigate("/");
+      } else {
+        setError(data.message);
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,9 +48,7 @@ const Login = () => {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
-      console.log("Form submitted", values);
-    },
+    onSubmit: handleSubmit, // Properly set the handleSubmit function here
   });
 
   return (
@@ -60,10 +88,11 @@ const Login = () => {
               <div className="error">{formik.errors.password}</div>
             ) : null}
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
+          <button type="submit" className="btn btn-primary" disabled={formik.isSubmitting || loading}>
+            {loading ? 'Please wait...' : 'Submit'}
           </button>
         </form>
+        {error && <div className="error">{error}</div>}
         <p className="signup-link">
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>

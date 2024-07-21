@@ -12,7 +12,7 @@ function Header() {
           <ol className={`header-nav-list ${menuOpen ? "open" : ""}`}>
           <div className="logo">My Blogs</div>
             <li className="header-nav-item">
-              <Link to="/"></Link>
+              <Link to="/">Home</Link>
             </li>
             <li className="header-nav-item">
               <Link to="/Blog">Blog</Link>

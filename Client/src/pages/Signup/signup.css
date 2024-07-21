@@ -1,6 +1,7 @@
 .form{
    display: grid;
   place-content: center;
+  
 }
 .signup-container {
   width: 100%;
@@ -14,8 +15,6 @@
 
 .signup-form-container {
   text-align: center;
-  /* display: grid;
-  place-content: center; */
 }
 
 .signup-form-container h1 {
