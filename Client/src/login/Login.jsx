@@ -3,11 +3,12 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./login.css";
+import { useAuth } from "../Auth/AuthContext.jsx";
 
 const Login = () => {
+  const { login } = useAuth(); 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (formValues) => {
@@ -22,7 +23,7 @@ const Login = () => {
       });
       const data = await response.json();
       if (data.success) {
-        setSubmitted(true);
+        login({ name: data.user.name }); // Set the user state with name
         alert("Logged in successfully");
         navigate("/");
       } else {
@@ -48,7 +49,7 @@ const Login = () => {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: handleSubmit, // Properly set the handleSubmit function here
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -89,12 +90,12 @@ const Login = () => {
             ) : null}
           </div>
           <button type="submit" className="btn btn-primary" disabled={formik.isSubmitting || loading}>
-            {loading ? 'Please wait...' : 'Submit'}
+            {loading ? 'Please wait...' : 'Login'}
           </button>
         </form>
         {error && <div className="error">{error}</div>}
         <p className="signup-link">
-          Don't have an account? <Link to="/signup">Sign Up</Link>
+          Don't have an account? <Link to="/SignUp">Sign Up</Link>
         </p>
       </div>
     </div>

@@ -21,9 +21,9 @@ const CreateBlog = () => {
       });
       const data = await response.json();
       if (data.success) {
-        // alert("Blog Created Successfully");
+        alert("Blog Created Successfully");
         console.log(data);
-        navigate("/blog");
+        navigate("/");
         setSubmitting(false);
         setLoading(false);
       } else {
