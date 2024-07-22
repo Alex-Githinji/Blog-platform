@@ -5,11 +5,11 @@ import "./header.css";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, logout } = useAuth(); // Get user and logout from AuthContext
-  const navigate = useNavigate(); // Initialize useNavigate
+  const { user, logout } = useAuth();
+  const navigate = useNavigate(); 
 
   const handleLogout = () => {
-    logout(() => navigate('/login')); // Redirect to login page after logout
+    logout(() => navigate('/login'));
   };
 
   return (
