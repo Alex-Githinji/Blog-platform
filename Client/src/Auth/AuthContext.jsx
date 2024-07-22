@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const login = (userData) => setUser(userData);
   const logout = (callback) => {
     setUser(null);
-    if (callback) callback(); // Call the callback after logging out
+    if (callback) callback(); 
   };
 
   return (

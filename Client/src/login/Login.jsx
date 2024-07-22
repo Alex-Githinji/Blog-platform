@@ -23,7 +23,7 @@ const Login = () => {
       });
       const data = await response.json();
       if (data.success) {
-        login({ name: data.user.name }); // Set the user state with name
+        login({ name: data.user.name }); 
         alert("Logged in successfully");
         navigate("/");
       } else {
