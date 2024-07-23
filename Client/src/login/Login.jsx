@@ -4,8 +4,40 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./login.css";
 import { useAuth } from "../Auth/AuthContext.jsx";
+import { toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+  const notifysuccess = () => {
+    toast.success("Login Successful", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  }
+
+  const notifyerror = () => {
+    toast.error("Failed to login", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      });
+    
+  }
+ 
+
   const { login } = useAuth(); 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,17 +52,20 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formValues),
+        credentials: "include"
       });
       const data = await response.json();
       if (data.success) {
-        login({ name: data.user.name }); 
-        alert("Logged in successfully");
+        login(data.user); 
+        notifysuccess();
         navigate("/");
       } else {
         setError(data.message);
+        notifyerror();
       }
     } catch (e) {
       setError(e.message);
+      notifyerror();
     } finally {
       setLoading(false);
     }
@@ -95,7 +130,7 @@ const Login = () => {
         </form>
         {error && <div className="error">{error}</div>}
         <p className="signup-link">
-          Don't have an account? <Link to="/SignUp">Sign Up</Link>
+          Don't have an account? <Link to="/signUp">Sign Up</Link>
         </p>
       </div>
     </div>

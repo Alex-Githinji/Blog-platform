@@ -26,7 +26,7 @@ function Header() {
                 <li className="header-nav-item">
                   <Link to="/CreateBlog">Create Blog</Link>
                 </li>
-                <li className="header-nav-item">Welcome, {user.name}</li>
+                <li className="header-nav-item">Welcome, {user.username}</li>
                 <li className="header-nav-item">
                   <button className="logout" onClick={handleLogout}>Logout</button>
                 </li>

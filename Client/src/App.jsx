@@ -8,6 +8,8 @@ import Login from './login/Login.jsx';
 import Footer from './components/footer/Footer.jsx';
 import { AuthProvider } from './Auth/AuthContext.jsx';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
           <Footer />
+          <ToastContainer />
         </AuthProvider>
       </BrowserRouter>
     </>
