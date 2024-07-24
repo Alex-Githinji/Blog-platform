@@ -10,6 +10,7 @@ import { AuthProvider } from './Auth/AuthContext.jsx';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EditBlog from './pages/editblog/Editblog.jsx';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+             <Route path="/edit/:id" element={ <ProtectedRoute><EditBlog /></ProtectedRoute>} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
           </Routes>

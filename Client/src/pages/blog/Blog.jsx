@@ -1,12 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './blog.css';
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- 
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -16,7 +16,7 @@ function Blog() {
         const response = await fetch('http://localhost:3001/blogs');
         const data = await response.json();
         if (data.success) {
-          setBlogs(data.blogs); 
+          setBlogs(data.blogs);
         } else {
           setError(data.message || 'Failed to fetch blogs');
         }
@@ -53,7 +53,7 @@ function Blog() {
   return (
     <section className="container">
       <header className="blog-header">
-        <h1>View blogs Available you can also create your Own</h1>
+        <h1>View Blogs Available You Can Also Create Your Own</h1>
         <p>Insights and thoughts on web development, design, and more.</p>
       </header>
       <main className="blogs">
@@ -64,8 +64,8 @@ function Blog() {
             <p className="meta">
               By {blog.Author} on {new Date(blog.createdAt).toLocaleDateString()}
             </p>
-            <Link to={`${blog.id}`} className="read-more">
-              Read more
+            <Link to={`/edit/${blog.id}`} className="edit">
+              Edit Blog
             </Link>
             <button className="delete" onClick={() => deleteBlog(blog.id)}>Delete</button>
           </article>

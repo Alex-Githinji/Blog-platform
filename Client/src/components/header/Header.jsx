@@ -18,14 +18,16 @@ function Header() {
         <nav className="header-nav">
           <ol className={`header-nav-list ${menuOpen ? "open" : ""}`}>
             <div className="logo">My Blogs</div>
-            <li className="header-nav-item">
-              <Link to="/">Blog</Link>
-            </li>
+           
             {user ? (
               <>
+               <li className="header-nav-item">
+              <Link to="/">Blog</Link>
+            </li>
                 <li className="header-nav-item">
                   <Link to="/CreateBlog">Create Blog</Link>
                 </li>
+              
                 <li className="header-nav-item">Welcome, {user.username}</li>
                 <li className="header-nav-item">
                   <button className="logout" onClick={handleLogout}>Logout</button>
