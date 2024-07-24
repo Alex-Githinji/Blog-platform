@@ -46,5 +46,29 @@ export const deleteAllBlogs = async (req, res) => {
 };
 
 
+export const editBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content, Author } = req.body;
+
+    const updatedBlog = await prisma.blogs.update({
+      where: {
+        id: id,
+      }, 
+      data: {
+        title,
+        content,
+        Author,
+      },
+    });
+
+    res.status(200).json({ success: true, message: "Blog updated successfully", updatedBlog });
+  } catch (e) {
+    res.status(500).json({ success: false, message: e.message });
+  }
+};
+
+
+
 
 

@@ -32,7 +32,6 @@ export const useLogin = async (req, res) => {
     }
     const isPasswordValid = bcrypt.compareSync(password, user.password);
     if (!isPasswordValid) {
-        // jwt.sign(user, process.env.)
         return res.status(401).json({ success: false, message: "Invalid email or password" });
         }
         const payload = {
