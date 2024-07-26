@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./login.css";
 import { useAuth } from "../Auth/AuthContext.jsx";
-import { toast, Bounce } from 'react-toastify';
+import { toast, Bounce, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      transition: Bounce,
+      transition: Flip,
     });
   }
 
